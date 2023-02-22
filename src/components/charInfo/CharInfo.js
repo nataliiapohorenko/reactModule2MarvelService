@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './charInfo.scss';
 import Spinner from '../spinner/Spinner';
@@ -78,12 +79,12 @@ const View = ({char}) =>{
                     {
                         comics.map((item,i)=>{
                             if(i>9) return;
-
+                            let comicsKey = item.resourceURI.substr(-10).replace(/[^\d]+/g,"");
                             return(
                                 <li key={i} className="char__comics-item">
-                                    <a href={item.resourceURI}>
+                                    <Link to={`/comics/${comicsKey}`}>
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 </li>
                             )
                             

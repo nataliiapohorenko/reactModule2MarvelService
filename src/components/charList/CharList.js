@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import './charList.scss';
 import useMarvelService from '../../services/MarvelService';
@@ -54,7 +55,8 @@ const CharList = (props) => {
         const elements = charList.map((item, i)=>{
             const {id, name, thumbnail} = item;
             return(
-                <li key={id} className='char__item'
+                <CSSTransition key={id} timeout={500} classNames="char__item">
+                    <li className='char__item'
                     ref={el => itemRefs.current[i] = el}
                     tabIndex={0}
                     onClick={()=> {props.onCharSelected(id);
@@ -68,11 +70,14 @@ const CharList = (props) => {
                     <img src={thumbnail} style={sizePic(thumbnail)} alt={name}/>
                     <div className="char__name">{name}</div>
                 </li>
+                </CSSTransition>
             )
         })
         return (
             <ul className="char__grid">
-                {elements}
+                <TransitionGroup component={null}>
+                    {elements}
+                </TransitionGroup>
             </ul>
         )
     }

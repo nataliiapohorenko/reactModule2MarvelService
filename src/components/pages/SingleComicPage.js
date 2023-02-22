@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
+import AppBanner from '../appBanner/AppBanner';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import useMarvelService from '../../services/MarvelService';
@@ -32,6 +32,7 @@ const SingleComicPage = () => {
     const content = !(loading || error || !comic) ? <View comic={comic}/> : null;
     return (
         <>
+        <AppBanner/>
             {errorMessage}
             {spinner}
             {content}
