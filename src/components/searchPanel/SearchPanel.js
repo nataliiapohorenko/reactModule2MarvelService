@@ -17,7 +17,6 @@ const SearchPanel = () => {
 
     const onCharLoaded = (char) => {
         setChar(char);
-        console.log(char.id)
         setSearchComplete(true);
     }
 
