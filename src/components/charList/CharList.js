@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import './charList.scss';
 import useMarvelService from '../../services/MarvelService';
@@ -104,7 +105,14 @@ const CharList = (props) => {
 
     return (
         <div className="char__list">
-            {elements}
+            <InfiniteScroll
+                dataLength={offset-201}
+                next={()=>onRequest(offset)}
+                hasMore={true}
+                scrollThreshold={0.95}
+            >
+                {elements}
+            </InfiniteScroll>
             <button 
                 className="button button__main button__long"
                 disabled={newItemLoading}
